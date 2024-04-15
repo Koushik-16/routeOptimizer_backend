@@ -6,8 +6,9 @@ import requests
 import ortools
 import googlemaps
 import numpy as np
+import config
 
-apikey = "AIzaSyDIyw2qM7Phd00iUsEmiAI3peIFmhFESdo"
+apikey = config.api_key
 
 app = Flask(__name__)
 CORS(app, origins="http://localhost:3000", always_send=False)
@@ -62,9 +63,9 @@ def calculate_distance_matrix(warehouses, delivery_locations):
             distance_meters = distance['rows'][0]['elements'][0]['distance']['value']
 
             # Convert distance to kilometers
-            distance_kms = distance_meters / 1000.0
+            # distance_kms = distance_meters / 1000.0
 
-            warehouse_distances.append(distance_kms)
+            warehouse_distances.append(distance_meters)
         distance_matrix.append(warehouse_distances)
 
     return distance_matrix
@@ -84,7 +85,7 @@ def calculate_mat(arr) :
                  distance_meters = distance['rows'][0]['elements'][0]['distance']['value']
 
             # Convert distance to kilometers
-                 distance_kms = int(distance_meters / 1000.0)
+                 distance_kms = int(distance_meters)
                  curr.append(distance_kms)
              else :
                 curr.append(matrix[j][i])
@@ -147,7 +148,7 @@ def handle_post():
             routing.AddDimension(
                 transit_callback_index,
                 0,  # no slack
-                3000,  # vehicle maximum travel distance
+                30000000,  # vehicle maximum travel distance
                 True,  # start cumul to zero
                 dimension_name,
             )
