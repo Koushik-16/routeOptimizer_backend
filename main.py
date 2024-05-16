@@ -82,9 +82,9 @@ def calculate_mat(arr) :
                  distance = gmaps.distance_matrix(chord1, chord2, mode='driving')
                  distance_meters = distance['rows'][0]['elements'][0]['distance']['value']
 
-            # Convert distance to kilometers
-                 distance_kms = int(distance_meters)
-                 curr.append(distance_kms)
+            
+                #  distance_kms = int(distance_meters)
+                 curr.append(distance_meters)
              else :
                 curr.append(matrix[j][i])
 
